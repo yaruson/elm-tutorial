@@ -1,45 +1,44 @@
 
 ![Logo](logo.png)
-# Elm Tutorial
+# Руководство по Elm
 
-__A tutorial on developing single page web applications (SPAs) with [Elm](http://elm-lang.org/).__
+__Руководство по разработке одностраничных приложений на (SPA) на [Elm](http://elm-lang.org/).__
 
-This tutorial covers:
+Это руководство покрывает:
 
-- Some Elm foundations
-- Understanding commands and subscriptions in Elm
-- Understanding the Elm architecture
-- Breaking an application in sub components and resources
-- Integrating CSS
-- Fetching and parsing JSON
-- Routing
-- CRUD operations
+- Некоторые основы Elm
+- Понимание commands и subscriptions в Elm
+- Понимание Архитектуры Elm
+- Разбивку приложения на подкомпоненты и ресурсы
+- Встраивание CSS
+- Загрузка и разбор JSON
+- Маршрутиация
+- Операции CRUD
 
-Read it online [here](http://www.elm-tutorial.org/).
+Читать онлайн [здесь](http://www.elm-tutorial.org/).
 
-You can also download offline version [here (PDF, ePub, Mobi)](https://www.gitbook.com/book/sporto/elm-tutorial/details).
+Вы также можете загрузить оффлайн версию [отсюда (PDF, ePub, Mobi)](https://www.gitbook.com/book/sporto/elm-tutorial/details).
 
-## Code
+## Исходники
 
-Code for the example application built in the second part of this tutorial can be
-found at <https://github.com/sporto/elm-tutorial-app>.
+Код демонстрационного приложения, разработанного во второй части этого руководства, можно найти на <https://github.com/sporto/elm-tutorial-app>.
 
-## Requirements
+## Требования
 
-For this tutorial you will need:
+Чтобы пройти это руководство вам понадобятся:
 
-- Elm version 0.18 (Installation is covered later in the tutorial)
-- Node JS version 5.1 +
-- Yarn package manager <https://yarnpkg.com/en/>
+- Elm версии 0.18 (об установке будет рассказано далее в этом руководстве)
+- Node JS версии 5.1 +
+- Менеджер пакетов Yarn <https://yarnpkg.com/en/>
 
-## Contributing
+## Сотрудничество
 
-Please open issues and send PRs at <https://github.com/sporto/elm-tutorial>.
+Не стесняйтесь открывать issues и отправлять pull requests на <https://github.com/sporto/elm-tutorial>.
 
 ---
 
-[Share on Twitter](https://twitter.com/intent/tweet?&text=Elm%20Tutorial&url=http%3A%2F%2Fwww.elm-tutorial.org&via=sebasporto) | [Follow @sebasporto](https://twitter.com/intent/user?screen_name=sebasporto)
+[Поделиться в Twitter](https://twitter.com/intent/tweet?&text=Elm%20Tutorial&url=http%3A%2F%2Fwww.elm-tutorial.org&via=sebasporto) | [Follow @sebasporto](https://twitter.com/intent/user?screen_name=sebasporto)
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Эта работа распространяется под лицензией <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a>.
 
 © Sebastian Porto 2016
