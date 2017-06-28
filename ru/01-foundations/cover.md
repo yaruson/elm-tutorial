@@ -1,6 +1,6 @@
-# Foundations
+# Основы
 
-This chapter covers:
+В этой главе:
 
-- Running a basic Elm application
-- Basic of functions and types in Elm
+- Запуск простого приложения Elm
+- Основы функций и типов Elm
