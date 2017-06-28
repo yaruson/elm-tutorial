@@ -1,17 +1,17 @@
-# Function basics
+# Основы функций
 
-This chapter covers basic Elm syntax that is important to get familiar with: functions, function signatures, partial application and the pipe operator.
+В этой главе мы познакомимся с основными элементами синтаксиса Elm: функциями, определениями функций, частичным применением и поточным оператором.
 
-## Functions
+## Функции
 
-Elm supports two kind of functions:
+Elm поддерживает два вида функций:
 
-- anonymous functions
-- named functions
+- анонимные
+- именные
 
-### Anonymous function
+### Анонимные функции
 
-An anonymous function, as its name implies, is a function we create without a name:
+Анонимные функции, как следует из названия, не имеют имени.
 
 ```elm
 \x -> x + 1
@@ -19,12 +19,11 @@ An anonymous function, as its name implies, is a function we create without a na
 \x y -> x + y
 ```
 
-Between the backslash and the arrow, you list the arguments of the function, and on the right of the arrow, you say what to do with those arguments.
+Между обратной косой чертой и стрелкой перечисляется список аргументов функции, а справа от стрелки — что делать с этими аргументами.
 
+### Именные функции
 
-### Named functions
-
-A named function in Elm looks like this:
+Именные функции на Elm выглядят так:
 
 ```elm
 add1 : Int -> Int
@@ -32,20 +31,20 @@ add1 x =
   x + 1
 ```
 
-- The first line in the example is the function signature. This signature is optional in Elm, but recommended because it makes the intention of your function clearer.
-- The rest is the implementation of the function. The implementation must follow the signature defined above.
+- Первая строка — это определение функции. Писать определения в Elm не обязательно, но желательно: так назначение функции становится более понятным.
+- Всё остальное — реализация функции. Она должна соответствовать определению.
 
-In this case the signature is saying: Given an integer (Int) as argument return another integer.
+В этом примере определение говорит: "Функция принимает на вход целое число (Int) и возвращает другое целое".
 
-You call it like:
+Вызов функции выглядит так:
 
 ```
 add1 3
 ```
 
-In Elm we use *whitespace* to denote function application (instead of using parenthesis).
+Для вызова функции в Elm вместо скобок используется *пробел*.
 
-Here is another named function:
+Вот другая именная функция:
 
 ```elm
 add : Int -> Int -> Int
@@ -53,24 +52,24 @@ add x y =
   x + y
 ```
 
-This function takes two arguments (both Int) and returns another Int. You call this function like:
+Эта функция принимает два целочисленных аргумента (Int) и возвращает Int. Вызов будет такой:
 
 ```elm
 add 2 3
 ```
 
-### No arguments
+### Функции без аргументов
 
-A function that takes no arguments is a constant in Elm:
+Если функция в Elm не имеет аргументов, она будет являться константой:
 
 ```elm
 name =
   "Sam"
 ```
 
-### How functions are applied
+### Как вызываются функции
 
-As shown above a function that takes two arguments may look like:
+Как было показано ранее, функция с двумя аргументами может выглядеть так:
 
 ```elm
 divide : Float -> Float -> Float
@@ -78,93 +77,93 @@ divide x y =
     x / y
 ```
 
-We can think of this signature as a function that takes two floats and returns another float:
+Сигнатуру можно понять так: "функция получает два числа с плавающей точкой и возвращает число с плавающей точкой".
 
 ```elm
 divide 5 2 == 2.5
 ```
 
-However, this is not quite true, in Elm all functions take exactly one argument and return a result. This result can be another function. 
-Let's explain this using the function above.
+Однако, это будет не совсем верно. В Elm все функции принимают на вход только один аргумент. Результатом может быть другая функция.
+Давайте разберёмся на примере:
 
 ```elm
--- When we do:
+-- Когда мы делаем вызов
 
 divide 5 2
 
--- This is evaluated as:
+-- Он выполняется как:
 
 ((divide 5) 2)
 
--- First `divide 5` is evaluated.
--- The argument `5` is applied to `divide`, resulting in an intermediate function.
+-- Сначала выполняется `divide 5`.
+-- Аргумент `5` применяется к `divide`, в результате получается промежуточная функция.
 
-divide 5 -- -> intermediate function
+divide 5 -- -> промежуточная функция
 
--- Let's call this intermediate function `divide5`.
--- If we could see the signature and body of this intermediate function, it would look like:
+-- Затем выполняется эта промежуточная функция `divide5`.
+-- Если бы мы могли увидеть её определение и тело, то прочитали бы:
 
 divide5 : Float -> Float
 divide5 y =
   5 / y
 
--- So we have a function that has the `5` already applied.
+-- Таким образом, мы получили функцию с уже применённой `5`.
 
--- Then the next argument is applied i.e. `2`
+-- Далее применяется следующий аргумент, то есть `2`:
 
 divide5 2
 
--- And this returns the final result
+-- После этого мы получаем конечный результат
 ```
 
-The reason we can avoid writing the parenthesis is because function application **associates to the left**.
+Мы можем обходиться без скобок потому что применение функции **ассоциируется влево**.
 
-### Grouping with parentheses
+### Группировка с помощью скобок
 
-When you want to call a function with the result of another function call you need to use parentheses for grouping the calls:
+Если вы хотите использовать результат одной функции в вызове другой, необходимо использовать скобки для группировки вызовов:
 
 ```elm
 add 1 (divide 12 3)
 ```
 
-Here the result of `divide 12 3` is given to `add` as the second parameter.
+Здесь результат `divide 12 3` подаётся вторым параметром в `add`.
 
-In contrast, in many other languages it would be written:
+В противоположность, во многих других языках это может быть записано так:
 
 ```js
 add(1, divide(12, 3))
 ```
 
-## Partial application
+## Частичное применение
 
-As explained above every function takes only one argument and returns another function or a result.
-This means you can call a function like `add` above with only one argument, e.g. `add 2` and get a *partially applied function* back.
-This resulting function has a signature `Int -> Int`.
+Каждая функция принимает только один аргумент и возвращает либо другую функцию, либо конечный результат.
+Это значит, что вы можете вызвать функцию вроде `add` с одним аргументом, например `add 2`, и получить *частично применённую функцию*.
+Эта функция будет иметь определение `Int -> Int`.
 
-`add 2` returns another function with the value `2` bound as the first parameter. Calling the returned function with a second value returns `2 + ` the second value:
+`add 2` возвращает другую функцию с привязанной `2` в качестве первого параметра. Вызов промежуточной функции со вторым параметром вернёт `2 + ` второе значение:
 
 ```elm
 add2 = add 2
-add2 3 -- result 5
+add2 3 -- получится 5
 ```
 
-Partial application is incredibly useful in Elm for making your code more readable and passing state between functions in your application.
+Частичное применение крайне полезно для обеспечения читаемости кода и передачи состояния между функциями в приложении.
 
-## The pipe operator
+## Поточный оператор
 
-As shown above you can nest functions like:
+Как было показано выше, вы можете делать вложенные вызовы так:
 
 ```elm
 add 1 (multiply 2 3)
 ```
 
-This is a trivial example, but consider a more complex example:
+Это простой случай, но вот что происходит с более сложными:
 
 ```elm
 sum (filter (isOver 100) (map getCost records))
 ```
 
-This code is difficult to read, because it resolves inside out. The pipe operator allows us to write such expressions in a more readable way:
+Этот код сложно прочитать, потому что он выполняется наизнанку. Поточный оператор позволяет записывать такие выражения в читаемом виде:
 
 ```elm
 3
@@ -172,9 +171,9 @@ This code is difficult to read, because it resolves inside out. The pipe operato
     |> add 1
 ```
 
-This relies heavily on partial application as explained before. In this example the value `3` is passed to a partially applied function `multiply 2`. Its result is in turn passed to another partially applied function `add 1`.
+Этот способ целиком опирается на частичное применение, рассмотренное ранее. В этом примере значение `3` передаётся к частично применённой функции `multiply 2`, а результат, в свою очередь — в частично применённую `add 1`.
 
-Using the pipe operator the complex example above would be written like:
+С использованием поточного оператора трудночитаемый код из предыдущего примера можно переписать так:
 
 ```elm
 records
