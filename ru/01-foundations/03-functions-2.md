@@ -1,24 +1,24 @@
-# More on functions
+# Подробнее о функциях
 
-## Type variables
+## Переменные типа
 
-Consider a function with a type signature like:
+Посмотрите на функцию со следующим определением:
 
 ```elm
 indexOf : String -> List String -> Int
 ```
 
-This hypothetical function takes a string and a list of strings and returns the index where the given string was found in the list or -1 if not found.
+Эта гипотетическая функция принимает строку и список строк, и возвращает индекс, по которому данная строка была найдена в списке, либо -1, если не найдена.
 
-But what if we instead have a list of integers? We wouldn't be able to use this function. However, we can make this function __generic__ by using __type variables__ or __stand-ins__ instead of specific types.
+Но что если нам придётся работать со списком целых чисел? Мы уже не сможем использовать эту функцию. Однако, мы можем сделать эту функцию __обобщённой__ с помощью __переменных типа__ или __дублёров__ вместо конкретных типов.
 
 ```elm
 indexOf : a -> List a -> Int
 ```
 
-By replacing `String` with `a`, the signature now says that `indexOf` takes a value of any type `a` and a list of that same type `a` and returns an integer. As long as the types match the compiler will be happy. You can call `indexOf` with a `String` and a list of `String`, or an `Int` and a list of `Int`, and it will work.
+После того как мы заменили `String` на `a`, определение функции теперь говорит, что `indexOf` принимает значение любого типа `a` и список такого же типа `a` и возвращает целое число. Покуда типы совпадают, компилятор не будет возражать. Вы можете вызывать `indexOf` со строкой и списком строк, либо целым числом и списком чисел, и всё будет работать.
 
-This way functions can be made more generic. You can have several __type variables__ as well:
+Вот таким образом функции можно сделать более общими. Вы также можете использовать несоклько __переменных типов__:
 
 ```elm
 switch : ( a, b ) -> ( b, a )
@@ -26,7 +26,7 @@ switch ( x, y ) =
   ( y, x )
 ```
 
-This function takes a tuple of types `a`, `b` and returns a tuple of types `b`, `a`. All these are valid calls:
+Эта функция принимает кортеж из типов `a` и `b`, а возвращает кортеж из `b` и `a`. Все эти вызовы будут верными:
 
 ```elm
 switch (1, 2)
@@ -34,7 +34,7 @@ switch ("A", 2)
 switch (1, ["B"])
 ```
 
-Note that any lowercase identifier can be used for type variables, `a` and `b` are just a common convention. For example the following signature is perfectly valid:
+Стоит отметить, что для переменных типов можно использовать любой идентификатор в нижнем регистре, а `a` и `b` просто общепринятое обозначение. Например, следующее определение будет совершенно правильным:
 
 ```
 indexOf : thing -> List thing -> Int
