@@ -1,42 +1,42 @@
-# Imports and modules
+# Импорты и модули
 
-In Elm you import a module by using the `import` keyword e.g.
+В Elm для импорта модулей используется ключевое слово `import`:
 
 ```elm
 import Html
 ```
 
-This imports the `Html` module. Then you can use functions and types from this module by using its fully qualified path:
+Модуль `Html` будет импортирован, и все функции и типы, определённые в нём, станут доступны по полному пути:
 
 ```elm
 Html.div [] []
 ```
 
-You can also import a module and expose specific functions and types from it:
+Можно сделать видимыми отдельные части импортируемого модуля:
 
 ```elm
 import Html exposing (div)
 ```
 
-`div` is mixed in the current scope. So you can use it directly:
+Функция `div` появится в текущей область видимости, и её можно будет использовать напрямую:
 
 ```elm
 div [] []
 ```
 
-You can even expose everything in a module:
+Ещё можно сделать видимым всё содержимое модуля:
 
 ```elm
 import Html exposing (..)
 ```
 
-Then you would be able to use every function and type in that module directly. But this is not recommended most of the time because we end up with ambiguity and possible clashes between modules.
+Тогда любую функцию или тип из модуля можно будет использовать напрямую. Однако так делать не рекомендцется, потому что это обязательно закончится неоднозначностью и конфликтами между модулями.
 
-## Modules and types with the same name
+## Модули и типы с одинаковыми именами
 
-Many modules export types with the same name as the module. For example, the `Html` module has an `Html` type and the `Task` module has a `Task` type.
+Часто модули экспортируют типы с такими же именами, как и у самих же модулей. Например, в модуле `Html` есть тип `Html`, а в модуле `Task` — тип `Task`.
 
-So this function that returns an `Html` element:
+Таким образом, запись функции, возвращающей элемент `Html`:
 
 ```elm
 import Html
@@ -46,7 +46,7 @@ myFunction =
     ...
 ```
 
-Is equivalent to:
+Эквивалентна записи:
 
 ```elm
 import Html exposing (Html)
@@ -56,32 +56,28 @@ myFunction =
     ...
 ```
 
-In the first one we only import the `Html` module and use the fully qualified path `Html.Html`.
+В первом случае мы импортируем модуль `Html` и используем полный путь `Html.Html`.
 
-In the second one we expose the `Html` type from the `Html` module. And use the `Html` type directly.
+Во втором мы делаем видимым тип `Html` из модуля `Html` и используем тип `Html` напрямую.
 
-## Module declarations
+## Определения модулей
 
-When you create a module in Elm, you add the `module` declaration at the top:
+Для создания модуля Elm в начале файла записывается определение `module`:
 
 ```elm
 module Main exposing (..)
 ```
 
-`Main` is the name of the module. `exposing (..)` means that you want to expose all functions and types in this module. Elm expects to find this module in a file called __Main.elm__, i.e. a file with the same name as the module.
+`Main` — это имя модуля. `exposing (..)` значит, что экспортируются все типы и функции, определённые в модуле. Elm будет ожидать, что этот модуль будет находится в файле с именем __Main.elm__: имя файла должно совпадать с именем модуля.
 
-You can have deeper file structures in an application. For example, the file __Players/Utils.elm__ should have the declaration:
+В приложении может быть сложная структура каталогов. Например, в файле __Players/Utils.elm__ модуль должен определяться так:
 
 ```elm
 module Players.Utils exposing (..)
 ```
 
-You will be able to import this module from anywhere in your application by:
+Его можно импортировать из любого места в приложении с помощью:
 
 ```elm
 import Players.Utils
 ```
-
-
-
-
