@@ -1,38 +1,38 @@
-# Union types
+# Составные типы
 
-In Elm, __Union Types__ are used for many things as they are incredibly flexible. They are also called ADT (Algebraic Data Types) in other languages. A simple union type looks like:
+Благодаря своей гибкости, __составные типы__ широко используются в Elm. В других языках они также называются алгебраическими типами данных. Простейший составной тип выглядит так:
 
 ```elm
 type Answer = Yes | No
 ```
 
-The `Answer` type can be either `Yes` or `No`.
+Тип `Answer` может принимать значения `Yes` и `No`.
 
-## Type and constructors
+## Тип и конструкторы
 
-A union type has the following components:
+У составного типа есть следующие части:
 
 ```elm
 type State = Pending | Done | Failed
     ^----^   ^---------------------^
-     type        constructors
+     тип          конструкторы
 ```
 
-In this example `State` is the `type`. And `Pending, Done and Failed` are constructors. These are called constructors because you construct a new instance of this type using them. e.g.
+В этом примере `State` является типом, а `Pending, Done и Failed` — конструкторами. Они называются конструкторами потому что при их использовании создаётся новый экземпляр данного типа, например:
 
 ```elm
 pendingState = Pending
 ```
 
-## Example
+## Пример
 
-For example a function that has this signature:
+Например, функция с таким определением:
 
 ```elm
 respond : Answer -> String
 ```
 
-Can either take `Yes` or `No` as the first argument e.g. `respond Yes` is a valid call.
+В качестве первого аргумента может принимать `Yes` или `No`, то есть вызов `respond Yes` будет правильным.
 
 ```
 respond : Answer -> String
@@ -44,47 +44,47 @@ respond answer =
         ...
 ```
 
-## Payload
+## Нагрузка
 
-Union types can have associated information with them:
+Составные типы могут нести дополнительную информацию, связанную с ними:
 
 ```elm
 type Answer = Yes | No | Other String
 ```
 
-In this case, the tag `Other` will have an associated string. You could call `respond` like this:
+В этом примере, метка `Other` будет иметь ассоциированную строку. Вы можете вызвать `respond` так:
 
 ```elm
 respond (Other "Hello")
 ```
 
-You need the parenthesis otherwise Elm will interpret this as passing two arguments to respond.
+Здесь скобки необходимы, иначе Elm интерпретирует запись как передачу двух аргументов в функцию `respond`.
 
-## Used as functions
+## Использование в качестве функций
 
-Note how we add a payload to `Other`:
+Обратите внимание на то, как мы добавили нагрузку к `Other`:
 
 ```elm
 Other "Hello"
 ```
 
-This is just like a function call where `Other` is the function. Union types behave just like functions. For example given a type:
+Это ни что иное как вызов функции `Other`. Составные типы ведут себя как обычные функции. Например, для типа:
 
 ```elm
 type Answer = Message Int String
 ```
 
-You will create a `Message` instance by:
+Создать экземпляр `Message` можно так:
 
 ```elm
 Message 1 "Hello"
 ```
 
-You can do partial application just like any other function.
+Кроме того, для составных типов, так же как и для обычных, можно делать частичное применение.
 
-## Nesting
+## Вкладывание
 
-It is very common to 'nest' one union type in another.
+"Вкладывание" одного составного типа в другой является распространённой практикой.
 
 ```elm
 type OtherAnswer = DontKnow | Perhaps | Undecided
@@ -92,23 +92,23 @@ type OtherAnswer = DontKnow | Perhaps | Undecided
 type Answer = Yes | No | Other OtherAnswer
 ```
 
-Then you can pass this to our `respond` function (which expect `Answer`) like this:
+Теперь можно передать функции `respond` (которая ожидает `Answer`) следующее:
 
 ```elm
 respond (Other Perhaps)
 ```
 
-## Type variables
+## Типы переменных
 
-It is also possible to use type variables or stand-ins:
+Кроме всего прочего, можно использовать переменные типов или дублёры:
 
 ```elm
 type Answer a = Yes | No | Other a
 ```
 
-This is an `Answer` that can be used with different types, e.g. Int, String.
+Это `Answer`, который может использоваться с различными типами, например Int или String.
 
-For example, respond could look like this:
+Предположим, функция `respond` выглядит так:
 
 ```elm
 respond : Answer Int -> String
@@ -116,23 +116,23 @@ respond answer =
     ...
 ```
 
-Here we are saying that the `a` stand-in should be of type `Int` by using  the `Answer Int` signature.
+Используя `Answer Int` в определении функции, мы говорим что дублёр `a` должен быть типа `Int`.
 
-So later we will be able to call respond with:
+Далее мы сможем вызвать respond так:
 
 ```elm
 respond (Other 123)
 ```
 
-But `respond (Other "Hello")` would fail because `respond` expects an integer in place of `a`.
+Однако `respond (Other "Hello")` не сработает, потому что `respond` ожидает целое число в качестве `a`.
 
-## A common use
+## Типовое применение
 
-One typical use of union types is passing around values in our program where the value can be one of a known set of possible values.
+Одно из типовых применений составных типов — передача данных между функциями приложения, которые принимают на вход одно из множества возможных значений.
 
-For example, in a typical web application, we can trigger messages to perform actions, e.g. load users, add user, delete user, etc. Some of these messages would have a payload.
+Например, в типичном веб-приложении, мы можем вырабатывать сообщения для произведения действий, например, загрузки списка пользователей, добавления, удаления и так далее. Некоторые из этих сообщений будут иметь нагрузку.
 
-It is common to use union types for this:
+Обычной практикой является использование составных типов:
 
 ```elm
 type Msg
@@ -142,15 +142,15 @@ type Msg
     ...
 ```
 
-## Some common union types
+## Некоторые распространённые составные типы
 
-There are some common union types in Elm that you will see very often.
+В Elm особенно часто встречаются несколько составных типов:
 
 ```
 type Bool = True | False
 ```
 
-There is no boolean in Elm, it is just a union type.
+В Elm нет булевого типа, это просто составной тип.
 
 ```
 type Maybe a
@@ -158,7 +158,7 @@ type Maybe a
     | Just a
 ```
 
-`Maybe` represents the possibility of having nothing or something.
+`Maybe` представляет возможность наличия или отсутствия чего либо.
 
 ```
 type Result error value
@@ -166,8 +166,8 @@ type Result error value
     | Err error
 ```
 
-`Result` represents the possibility of having two outcomes from an operation. `Ok` with the associated value and `Err` with the associated error.
+`Result` представляет вероятность одного из двух исходов операции: `Ok` с ассоциированным значением, и `Err` с ассоциированной ошибкой.
 
 ---
 
-There is a lot more about Union types. If interested read more about this [here](http://elm-lang.org/guide/model-the-problem).
+Про составные типы ещё есть много интересного. Вы можете узнать о них больше [здесь](http://elm-lang.org/guide/model-the-problem).
