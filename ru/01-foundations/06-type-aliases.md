@@ -1,6 +1,6 @@
-# Type aliases
+# Псевдонимы типов
 
-A __type alias__ in Elm is, as its name says, an alias for something else. For example, in Elm you have the core `Int` and `String` types. You can create aliases for them:
+__Псевдонимы типов__ в Elm являются, как следует из названия, псевдонимами для чего-то другого. Например, в Elm есть встроенные типы `Int` и `String`. Для них можно определить псевдонимы:
 
 ```elm
 type alias PlayerId = Int
@@ -8,23 +8,23 @@ type alias PlayerId = Int
 type alias PlayerName = String
 ```
 
-Here we have created a couple of type alias that simply point to other core types. This is useful because instead of having a function like:
+Мы определили пару типов, которые просто ссылаются на другие встроенные типы. Это оказывается полезным, когда вместо функции:
 
 ```elm
 label: Int -> String
 ```
 
-You can write it like:
+Можно записать:
 
 ```elm
 label: PlayerId -> PlayerName
 ```
 
-In this way, it is much clearer what the function is asking for.
+Таким образом, становится намного понятнее, что передавать в функцию.
 
-## Records
+## Записи
 
-A record definition in Elm looks like:
+В Elm определение записи выглядит так:
 
 ```elm
 { id : Int
@@ -32,13 +32,13 @@ A record definition in Elm looks like:
 }
 ```
 
-If you were to have a function that takes a record, you would have to write a signature like:
+Для определения функции, принимающей запись, пришлось бы написать:
 
 ```elm
 label: { id : Int, name : String } -> String
 ```
 
-Quite verbose, but type aliases help a lot with this:
+Выглядит многословно, но с псевдонимами типов становится намного лучше:
 
 ```elm
 type alias Player =
@@ -49,11 +49,11 @@ type alias Player =
 label: Player -> String
 ```
 
-Here we create a `Player` type alias that points to a record definition. Then we use that type alias in our function signature.
+Мы создали псевдоним типа `Player`, ссылающийся на определение записи. Затем использовали псевдоним типа при определении функции.
 
-## Constructors
+## Конструкторы
 
-Type aliases can be used as __constructor__ functions. Meaning that we can create a real record by using the type alias as a function.
+Псевдонимы типов могут быть использованы в качестве __конструкторов__. Это значит, что мы можем создать экземпляр записи, используя псевдоним в качестве функции.
 
 ```elm
 type alias Player =
@@ -65,4 +65,4 @@ Player 1 "Sam"
 ==> { id = 1, name = "Sam" }
 ```
 
-Here we create a `Player` type alias. Then, we call `Player` as a function with two parameters. This gives us back a record with the proper attributes. Note that the order of the arguments determines which values will be assigned to which attributes.
+Мы создали псевдоним типа `Player`. Затем, вызвали `Player` как функцию с двумя параметрами, а получили запись с соответствующими атрибутами. Обратите внимание, что поля записи заполняются в соответствии с порядком аргументов.
