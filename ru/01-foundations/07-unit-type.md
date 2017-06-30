@@ -1,8 +1,8 @@
-# The unit type
+# Тип Unit
 
-The empty tuple `()` is called the __unit type__ in Elm.  It is so prevalent that it deserves some explanation.
+Пустой кортеж `()` называется __типом unit__. Он является настолько распространённым, что требует некоторых пояснений.
 
-Consider a type alias with a __type variable__ (represented by `a`):
+Рассмотрим псевдоним типа с __перемнной типа__ (представленной `a`):
 
 ```elm
 type alias Message a =
@@ -11,7 +11,7 @@ type alias Message a =
     }
 ```
 
-You can make a function that expects a `Message` with the `body` as a `String` like this:
+Вы можете написать функцию, которая ожидает получить `Message` с полем `body` типа `String`:
 
 ```elm
 readMessage : Message String -> String
@@ -19,7 +19,7 @@ readMessage message =
     ...
 ```
 
-Or a function that expects a `Message` with the `body` as a List of Integers:
+...или функцию, ожидающую получить в `body` список из целых чисел:
 
 ```elm
 readMessage : Message (List Int) -> String
@@ -27,7 +27,7 @@ readMessage message =
     ...
 ```
 
-But what about a function that doesn't need a value in the body? We use the unit type for indicating that the body should be empty:
+Но как насчёт функции, которой не нужно значение в `body`? Для обозначения того, что `body` может быть пустым, используется тип unit:
 
 ```elm
 readMessage : Message () -> String
@@ -35,20 +35,20 @@ readMessage message =
     ...
 ```
 
-This function takes `Message` with an __empty body__. This is not the same as __any value__, just an __empty__ one. 
+Эта функция принимает `Message` с __пустым body__. Это не то же самое, что и __любое значение__, а просто __пустое__. 
 
-So the unit type is commonly used as a placeholder for an empty value.
+Таким образом, тип unit обычно используется в качестве заполнителя для пустого значения.
 
-## Task
+## Задача
 
-A real world example of this is the `Task` type. When using `Task`, you will see the unit type very often.
+Наглядным примером является тип `Task`, используя который вы будете встречать тип unit очень часто.
 
-A typical task has an __error__ and a __result__:
+Обычно у задачи есть __error__ и __result__:
 
 ```elm
 Task error result
 ```
 
-- Sometimes we want a task where the error can be safely ignored: `Task () result`
-- Or the result is ignored: `Task error ()`
-- Or both: `Task () ()`
+- Нам может потребоваться задача, для которой ошибки можно безболезненно игнорировать `Task () result`
+- Или же игнорировать результат: `Task error ()`
+- Или всё вместе: `Task () ()`
