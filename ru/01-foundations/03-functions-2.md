@@ -40,37 +40,37 @@ switch (1, ["B"])
 indexOf : thing -> List thing -> Int
 ```
 
-## Functions as arguments
+## Функции в качестве аргументов
 
-Consider a signature like:
+Посмотрите на функцию со следующим определением:
 
 ```elm
 map : (Int -> String) -> List Int -> List String
 ```
 
-This function:
+Эта функция:
 
-- takes a function: the `(Int -> String)` part
-- a list of integers
-- and returns a list of strings
+- принимает функцию: часть `(Int -> String)`
+- список целых чисел
+- и возвращает список строк
 
-The interesting part is the `(Int -> String)` fragment. This says that a function must be given conforming to the `(Int -> String)` signature.
+Интересная часть — `(Int -> String)`. Она говорит, что передаваемая функция должна соответствовать определению `(Int -> String)`.
 
-For example, `toString` from core is such function. So you could call this `map` function like:
+Например, `toString` из ядра является такой функцией. Таким образом, вы должны вызывать нашу функцию `map` так:
 
 ```elm
 map toString [1, 2, 3]
 ```
 
-But `Int` and `String` are too specific. So most of the time you will see signatures using stand-ins instead:
+Но типы `Int` и `String` слишком конкретные. Поэтому, большую часть времени вы будете иметь дело с определениями, использующими вместо них дублёры:
 
 ```elm
 map : (a -> b) -> List a -> List b
 ```
 
-This function maps a list of `a` to a list of `b`. We don't really care what `a` and `b` represent as long as the given function in the first argument uses the same types.
+Эта функция отображает список из `a` в список из `b`. Нам всё равно, какие типы представляют `a` и `b`, до тех пор, пока переданная первым аргументом функция использует такие же типы.
 
-For example, given functions with these signatures:
+Например, если у нас есть такие функции:
 
 ```elm
 convertStringToInt : String -> Int
@@ -78,7 +78,7 @@ convertIntToString : Int -> String
 convertBoolToInt : Bool -> Int
 ```
 
-We can call the generic map like:
+Мы можем произвести обобщённое отображение следующим образом:
 
 ```elm
 map convertStringToInt ["Hello", "1"]
