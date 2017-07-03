@@ -1,18 +1,18 @@
-> This page covers Elm 0.18
+> Материал на этой странице относится к Elm 0.18
 
-# Introduction
+# Введение
 
-When building front end applications in Elm, we use the pattern known as the Elm architecture. This pattern provides a way of creating self contained components that can be reused, combined, and composed in endless variety.
+Архитектура Elm — шаблон разработки, который используется при разработке фронтэнд-приложений. Он предлагает способ разработки самодостаточных компонентов которые можно переиспользовать, сочетать и собирать друг в друга бесконечным числом способов.
 
-Elm provides the `Html` module for this. This is easier to understand by building a small app.
+Для этого Elm предоставляет модуль `Html`. Это лучше объяснить на примере простого приложения.
 
-Install elm-html:
+Установите elm-html:
 
 ```elm
 elm package install elm-lang/html
 ```
 
-Create a file called __App.elm__:
+Создайте файл __App.elm__:
 
 ```elm
 module App exposing (..)
@@ -20,7 +20,7 @@ module App exposing (..)
 import Html exposing (Html, div, text, program)
 
 
--- MODEL
+-- МОДЕЛЬ
 
 
 type alias Model =
@@ -33,7 +33,7 @@ init =
 
 
 
--- MESSAGES
+-- СООБЩЕНИЯ
 
 
 type Msg
@@ -41,7 +41,7 @@ type Msg
 
 
 
--- VIEW
+-- ПРЕДСТАВЛЕНИЕ
 
 
 view : Model -> Html Msg
@@ -51,7 +51,7 @@ view model =
 
 
 
--- UPDATE
+-- ОБНОВЛЕНИЕ
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -62,7 +62,7 @@ update msg model =
 
 
 
--- SUBSCRIPTIONS
+-- ПОДПИСКИ
 
 
 subscriptions : Model -> Sub Msg
@@ -71,7 +71,7 @@ subscriptions model =
 
 
 
--- MAIN
+-- ГЛАВНАЯ ФУНКЦИЯ
 
 
 main : Program Never Model Msg
@@ -84,13 +84,12 @@ main =
         }
 ```
 
-You can run this program running:
+Запустить программу можно командой:
 
 ```bash
 elm reactor
 ```
 
-And opening http://localhost:8000/App.elm
+А затем открыть в браузере http://localhost:8000/App.elm
 
-This is a lot of code for just showing "Hello", but it will help us understand the structure of even very complex Elm applications.
-
+Здесь довольно много кода, чтобы просто вывести "Hello", но он поможет лучше понять структуру самых сложных приложений Elm.
