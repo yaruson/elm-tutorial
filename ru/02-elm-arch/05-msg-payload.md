@@ -1,8 +1,8 @@
-> This page covers Elm 0.18
+> Материал на этой странице относится к Elm 0.18
 
-# Messages with payload
+# Сообщения с нагрзкой
 
-You can send a payload in your message:
+Вы можете передавать нагрузку вместе с сообщениями:
 
 ```elm
 module Main exposing (..)
@@ -11,7 +11,7 @@ import Html exposing (Html, button, div, text, program)
 import Html.Events exposing (onClick)
 
 
--- MODEL
+-- МОДЕЛЬ
 
 
 type alias Model =
@@ -24,7 +24,7 @@ init =
 
 
 
--- MESSAGES
+-- СООБЩЕНИЯ
 
 
 type Msg
@@ -32,7 +32,7 @@ type Msg
 
 
 
--- VIEW
+-- ПРЕДСТАВЛЕНИЕ
 
 
 view : Model -> Html Msg
@@ -44,7 +44,7 @@ view model =
 
 
 
--- UPDATE
+-- ОБНОВЛЕНИЕ
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -55,7 +55,7 @@ update msg model =
 
 
 
--- SUBSCRIPTIONS
+-- ПОДПИСКИ
 
 
 subscriptions : Model -> Sub Msg
@@ -64,7 +64,7 @@ subscriptions model =
 
 
 
--- MAIN
+-- ГЛАВНАЯ ФУНКЦИЯ
 
 
 main : Program Never Model Msg
@@ -77,20 +77,20 @@ main =
         }
 ```
 
-Note how the `Increment` message requires an integer:
+Обратите внимание: теперь сообщению `Increment` требуется целое число:
 
 ```elm
 type Msg
     = Increment Int
 ```
 
-Then in the view we trigger that message with a payload:
+Теперь в представлении отправим сообщение с нагрузкой:
 
 ```elm
 onClick (Increment 2)
 ```
 
-And finally in update we use __pattern matching__ to extract the payload:
+И наконец, в функции обновления используем __сопоставление c образцом__ (pattern matching) чтобы извлечь нагрузку:
 
 ```elm
 update msg model =

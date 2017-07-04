@@ -4,7 +4,7 @@ import Html exposing (Html, button, div, text, program)
 import Html.Events exposing (onClick)
 
 
--- MODEL
+-- МОДЕЛЬ
 
 
 type alias Model =
@@ -17,7 +17,7 @@ init =
 
 
 
--- MESSAGES
+-- СООБЩЕНИЯ
 
 
 type Msg
@@ -26,7 +26,7 @@ type Msg
 
 
 
--- VIEW
+-- ПРЕДСТАВЛЕНИЕ
 
 
 view : Model -> Html Msg
@@ -42,7 +42,7 @@ view model =
 
 
 
--- UPDATE
+-- ОБНОВЛЕНИЕ
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -56,7 +56,7 @@ update msg model =
 
 
 
--- SUBSCRIPTIONS
+-- ПОДПИСКИ
 
 
 subscriptions : Model -> Sub Msg
@@ -65,7 +65,7 @@ subscriptions model =
 
 
 
--- MAIN
+-- ГЛАВНАЯ ФУНКЦИЯ
 
 
 main =

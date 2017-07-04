@@ -1,8 +1,8 @@
-> This page covers Elm 0.18
+> Материал на этой странице относится к Elm 0.18
 
-# Messages
+# Сообщения (messages)
 
-In the last section, we created an application using Html.program that was just static Html. Now let's create an application that responds to user interaction using messages.
+В предыдущем разделе мы создали приложение используя `Html.propgram`, которое было просто статическим Html. Теперь давайте создадим приложение, которое реагирует на пользовательское взаимодействие посредством сообщений.
 
 ```elm
 module Main exposing (..)
@@ -11,7 +11,7 @@ import Html exposing (Html, button, div, text, program)
 import Html.Events exposing (onClick)
 
 
--- MODEL
+-- МОДЕЛЬ
 
 
 type alias Model =
@@ -24,7 +24,7 @@ init =
 
 
 
--- MESSAGES
+-- СООБЩЕНИЯ
 
 
 type Msg
@@ -33,7 +33,7 @@ type Msg
 
 
 
--- VIEW
+-- ПРЕДСТАВЛЕНИЕ
 
 
 view : Model -> Html Msg
@@ -49,7 +49,7 @@ view model =
 
 
 
--- UPDATE
+-- ОБНОВЛЕНИЕ
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -63,7 +63,7 @@ update msg model =
 
 
 
--- SUBSCRIPTIONS
+-- ПОДПИСКИ
 
 
 subscriptions : Model -> Sub Msg
@@ -72,7 +72,7 @@ subscriptions model =
 
 
 
--- MAIN
+-- ГЛАВНАЯ ФУНКЦИЯ
 
 
 main =
@@ -88,7 +88,11 @@ This program is very similar to the previous program we did, but now we have two
 
 Let's look more closely at the `view` and `update` functions.
 
-### View
+Эта программа очень похожа на предыдущую, но теперь у нас есть два сообщения: `Expand` и `Collapse`. Вы можете запустить эту программу скопировав исходный код в файл и открыв его в Elm reactor.
+
+Посмотрим внимательнее на функции `view` и `update`.
+
+### Представление (view)
 
 ```elm
 view : Model -> Html Msg
@@ -120,6 +124,6 @@ update msg model =
             ( False, Cmd.none )
 ```
 
-`update` responds to the possible messages. Depending on the message, it returns the desired state. When the message is `Expand`, the new state will be `True` (expanded). 
+`update` реагирует на возможные сообщение. В зависимости от сообщения, она возвращает требуемое состояние. Когда приходит сообщение `Expand`, новое состояние будет `True` (развёрнуто). 
 
-Next let's see how __Html.program__ orchestrates these pieces together.
+Далее мы посмотрим как __Html.program__ организует эти части вместе.

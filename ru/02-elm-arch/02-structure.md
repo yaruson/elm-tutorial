@@ -1,16 +1,16 @@
-> This page covers Elm 0.18
+> Материал на этой странице относится к Elm 0.18
 
-# Structure of Html.program
+# Структура Html.program
 
-### Imports
+### Импорты
 
 ```elm
 import Html exposing (Html, div, text, program)
 ```
 
-- We will use the `Html` type from the `Html` module, plus a couple of functions `div`, `text` and `program`.
+- Мы будем использовать тип `Html` из модужя `Html`, а также несколько функций: `div`, `text` и `program`.
 
-### Model
+### Модель (model)
 
 ```elm
 type alias Model =
@@ -22,23 +22,23 @@ init =
     ( "Hello", Cmd.none )
 ```
 
-- First we define our application model as a type alias, in this kind. Here it is just a `String`.
-- Then we define an `init` function. This function provides the initial input for the application. 
+- Для начала определим модель нашего приложения как синоним типа. Сейчас это просто `String`.
+- Теперь определим функцию `init`. Она задаст начальное состояние приложения.
 
-__Html.program__ expects a tuple with `(model, command)`. The first element in this tuple is our initial state, e.g. "Hello". The second element is an initial command to run. More on this later.
+__Html.program__ получает на вход кортеж `(model, command)`. Первый элемент в кортеже - начальное состояние приложения, в нашем случае "Hello". Второй - начальная команда на выполнение. В дальнейшем мы разберём этот момент подробно.
 
-When using the elm architecture, we compose all components models into a single state tree. More on this later too.
+При использовании Архитектуры Elm, мы объединяем все модели компонентов в единое дерево состояния. Об этом также чуть позже.
 
-### Messages
+### Сообщения (messages)
 
 ```elm
 type Msg
     = NoOp
 ```
 
-Messages are things that happen in our applications that our component responds to. In this case, the application doesn't do anything, so we only have a message called `NoOp`.
+Сообщения - это сущности, которые появляются в приложении, и на которые реагируют компоненты. В нашем случае, приложение ничего не делает, поэтому сообщение определяем всего одно -  `NoOp` (пустая операция).
 
-Other examples of messages could be `Expand` or `Collapse` to show and hide a widget. We use union types for messages:
+Другими сообщениями могли бы быть, например, `Expand` или `Collapse`, показывающие или скррывающте виджет. Для сообщений используются составные типы:
 
 ```elm
 type Msg
@@ -46,7 +46,7 @@ type Msg
     | Collapse
 ```
 
-### View
+### Представление (view)
 
 ```elm
 view : Model -> Html Msg
@@ -55,9 +55,9 @@ view model =
         [ text model ]
 ```
 
-The function `view` renders an Html element using our application model. Note that the type signature is `Html Msg`. This means that this Html element would produce messages tagged with Msg. We will see this when we introduce some interaction.
+Функция `view` отрисовывает элемент Html, используя модель нашего приложения. Обратите внимание на её определение: `Html Msg`, оно говорит о том, что этот элемент Html будет производить сообщения типа Msg. Мы пронаблюдаем это, когда добавим немного интерактивности.
 
-### Update
+### Обновление (update)
 
 ```elm
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -67,11 +67,11 @@ update msg model =
             ( model, Cmd.none )
 ```
 
-Next we define an `update` function, this function will be called by `Html.program` each time a message is received. This update function responds to messages updating the model and returning commands as needed. 
+Затем мы определяем функцию `update`, которая будет вызываться `Html.program` при каждом получении сообщения. Реакцией функции обновления на сообщения является необходимое обновление модели и возвращение необходимых команд.
 
-In this example, we only respond to `NoOp` and return the unchanged model and `Cmd.none` (meaning no command to perform).
+В этом примере мы обрабатываем `NoOp` и возвращаем неизменённую модель икоманду `Cmd.none` (то есть, не даём никаких команд).
 
-### Subscriptions
+### Подписки (subscriptions)
 
 ```elm
 subscriptions : Model -> Sub Msg
@@ -79,15 +79,15 @@ subscriptions model =
     Sub.none
 ```
 
-We use subscriptions to listen for external input to our application. Some examples of subscriptions are:
+Мы используем подписки для получения внешнего ввода в приложения. Вот примеры подписок:
 
-- Mouse movements
-- Keyboard events
-- Browser location changes
+- перемещение мыши;
+- события клавиатуры;
+- изменения в адресе страницы.
 
-In this case, we are not interested in any external input so we use `Sub.none`.
+В этом случае мы не заинтересованы в обработке какого-либо внешнего ввода, поэтому используем `Sub.none`.
 
-### Main
+### Главная функция (main)
 
 ```elm
 main : Program Never Model Msg
@@ -100,11 +100,4 @@ main =
         }
 ```
 
-Finally `Html.program` wires everything together and returns an html element that we can render in the page. `program` takes our `init`, `view`, `update` and `subscriptions`.
-
-
-
-
-
-
- 
+Наконец, `Html.program` связывает всё вместе и возвращает элемент html, который мы можем отрисовать на странице. `program` принимает наши `init`, `view`, `update` и `subscriptions`.

@@ -1,9 +1,9 @@
-# The Elm architecture
+# Архитектура Elm
 
-This chapter covers:
+В этой главе:
 
-- Overview of the Elm architecture
-- Introduction to Html.program
-- Messages
-- Commands
-- Subscriptions
+- Знакомство с архитектурой Elm (The Elm Architecture)
+- Введеиние в Html.program
+- Сообщения (messages)
+- Команды (commands)
+- Подписки (subscriptions)

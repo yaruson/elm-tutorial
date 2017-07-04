@@ -4,10 +4,10 @@ participant program #white
 participant update #white
 participant view #white
 
-program -> view : Render view
+program -> view : Отрисовывает представление
 |||
-view -> program : Trigger message e.g. Expand
-program -> update : Send message with the current state
-update --> program : Return updated state and command
-program -> view : Render view
+view -> program : Отправляет сообщение, например, Expand
+program -> update : Перенаправляет сообщение с текущим состоянием
+update --> program : Возвращает обновлённое состояние и команду
+program -> view : Отрисовывает представление
 @enduml
